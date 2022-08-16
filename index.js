@@ -89,9 +89,18 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 const DB =
   "mongodb+srv://harshvora:harshpatel98@cluster0.wkulyrj.mongodb.net/?retryWrites=true&w=majority";
-  
 // middleware
+
+
+app.get("/test", (req,res)=>{
+res.send("Hello word");
+});
+
 app.use(express.json());
+app.use(authRouter);
+app.use(adminRouter);
+app.use(productRouter);
+app.use(userRouter);
 
 // Connections
 mongoose
@@ -102,9 +111,6 @@ mongoose
   .catch((e) => {
     console.log(e);
   });
-
-
-app.get("/", (req,res) => res.send("testing...."));
 
 app.listen(PORT, () => {
   console.log(`connected at port ${PORT}`);
