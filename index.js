@@ -1,32 +1,32 @@
-// const express = require('express')
-// const app = express()
-// const dotenv = require("dotenv")
-// const cors = require("cors")
-// const userRouter = require("./routers/user")
-// const authRouter = require("./routers/auth")
-// const { default: mongoose } = require('mongoose')
-// // const image = require("./modules/Image")
-// const myFile = require("./modules/Image")
-// const multer = require("multer")
-// const fs = require("fs")
+const express = require('express')
+const app = express()
+const dotenv = require("dotenv")
+const cors = require("cors")
+const userRouter = require("./routers/user")
+const authRouter = require("./routers/auth")
+const { default: mongoose } = require('mongoose')
+// const image = require("./modules/Image")
+const myFile = require("./modules/Image")
+const multer = require("multer")
+const fs = require("fs")
 
-// const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000
+dotenv.config()
 
-// dotenv.config()
-// mongoose.connect("mongodb+srv://harsh5404:har5404@cluster0.kmphfal.mongodb.net/?retryWrites=true&w=majority",
-// // mongoose.connect(process.env.MONGO_URL,
+mongoose.connect("mongodb+srv://harsh5404:har5404@cluster0.kmphfal.mongodb.net/?retryWrites=true&w=majority",
+// mongoose.connect(process.env.MONGO_URL,
+    {
+        keepAlive: true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true
 
-//     {
-//         keepAlive: true,
-//         useNewUrlParser: true,
-//         useUnifiedTopology: true
+    }
+).then(() => console.log("Db Connected!")).catch(() => console.log("Error while db connection"));
 
-//     }
-// ).then(() => console.log("Db Connected!")).catch(() => console.log("Error while db connection"));
-// app.use(cors());
-// app.use(express.json());
-// app.get("/", (req,res)=> res.send("hellos woe!"));
-// app.use("/api/auth", authRouter);
+app.use(cors());
+app.use(express.json());
+app.get("/", (req,res)=> res.send("hellos woe!"));
+app.use("/api/auth", authRouter);
 
 // const multerStorage = multer.diskStorage({
 //     destination: (req, file, cb) => {
@@ -77,41 +77,5 @@
 //     }
 // });
  
-// app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
-
-// IMPORTS FROM PACKAGES
-const express = require("express");
-const mongoose = require("mongoose");
-
-// INIT
-const PORT = process.env.PORT || 3000;
-const app = express();
-const DB =
-  "mongodb+srv://harshvora:harshpatel98@cluster0.wkulyrj.mongodb.net/?retryWrites=true&w=majority";
-// middleware
-
-
-app.get("/test", (req,res)=>{
-res.send("Hello word");
-});
-
-app.use(express.json());
-app.use(authRouter);
-app.use(adminRouter);
-app.use(productRouter);
-app.use(userRouter);
-
-// Connections
-mongoose
-  .connect(DB)
-  .then(() => {
-    console.log("Connection Successful");
-  })
-  .catch((e) => {
-    console.log(e);
-  });
-
-app.listen(PORT, () => {
-  console.log(`connected at port ${PORT}`);
-});
