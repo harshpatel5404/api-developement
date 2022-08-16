@@ -24,6 +24,7 @@ mongoose.connect(process.env.MONGO_URL,
 ).then(() => console.log("Db Connected!")).catch(() => console.log("Error while db connection"));
 app.use(cors());
 app.use(express.json());
+app.get("/", (req,res)=> res.send("hellos woe!"));
 app.use("/api/auth", authRouter);
 
 
