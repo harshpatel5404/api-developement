@@ -10,7 +10,7 @@ const myFile = require("./modules/Image")
 const multer = require("multer")
 const fs = require("fs")
 
-const port = 3000 || process.env.PORT
+const port = process.env.PORT || 3000
 
 dotenv.config()
 mongoose.connect(process.env.MONGO_URL,
@@ -70,15 +70,15 @@ app.post("/api/uploadFile", upload.single("myFile"), async (req, res) => {
         //   name :  req.file.filename,
         // }); 
         // let savedFile = await myfile.save();
-       
+
 
         res.status(200).json({
             status: "success",
             message: "File created successfully!!",
-            save :  newFile
+            save: newFile
         });
     } catch (error) {
-        res.json({ 
+        res.json({
             error,
         });
     }
@@ -88,18 +88,18 @@ app.post("/api/uploadFile", upload.single("myFile"), async (req, res) => {
 
 app.get("/api/getFiles", async (req, res) => {
     try {
-      const files = await myFile.find();
-      res.status(200).json({
-        status: "success",
-        files,
-      });
+        const files = await myFile.find();
+        res.status(200).json({
+            status: "success",
+            files,
+        });
     } catch (error) {
-      res.json({
-        status: "Fail",
-        error,
-      });
+        res.json({
+            status: "Fail",
+            error,
+        });
     }
-  });
+});
 
 // app.post("/uploadphoto", upload.single('myImage'), (req, res) => {
 //     var img = fs.readFileSync(req.file.path);
