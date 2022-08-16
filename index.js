@@ -13,7 +13,8 @@ const fs = require("fs")
 const port = process.env.PORT || 3000
 
 dotenv.config()
-mongoose.connect(process.env.MONGO_URL,
+mongoose.connect("mongodb+srv://harsh5404:har5404@cluster0.kmphfal.mongodb.net/?retryWrites=true&w=majority",
+// mongoose.connect(process.env.MONGO_URL,
 
     {
         keepAlive: true,
